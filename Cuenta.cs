@@ -31,7 +31,7 @@ namespace Banco
             }
 
         }
-
+        
         public abstract void Extraer(decimal Monto);
 
         public void Depositar(decimal Monto)

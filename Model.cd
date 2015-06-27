@@ -3,12 +3,13 @@
   <Class Name="Banco.Banco">
     <Position X="0.5" Y="0.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAECAAACAAAAAECAAAEAgAAAAAAAAAAAAUAAA=</HashCode>
+      <HashCode>AAAEAIAAECIAACIAAAAECAAAEAgAAAAAAAAAAAAUAAA=</HashCode>
       <FileName>Banco.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
       <Field Name="ltitular" />
       <Field Name="lcuentas" />
+      <Field Name="lmovimientos" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Banco.CajaAhorro">
@@ -33,6 +34,9 @@
   </Class>
   <Class Name="Banco.Cuenta">
     <Position X="6" Y="0.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAABAAAAAAAAAAAAAAEAAAAAYAAAAGAAA=</HashCode>
       <FileName>Cuenta.cs</FileName>
@@ -47,6 +51,19 @@
       <HashCode>AAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CuentaCorriente.cs</FileName>
     </TypeIdentifier>
+  </Class>
+  <Class Name="Banco.Movimiento">
+    <Position X="2.75" Y="4" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAQEAEAEAABAgAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Movimiento.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Cuenta" />
+    </ShowAsAssociation>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

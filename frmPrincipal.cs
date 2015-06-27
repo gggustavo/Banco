@@ -57,10 +57,10 @@ namespace Banco
             frmmovimientos.Show(this);
         }
 
-
-
-  
-
-       
+        private void movimientosMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListadoMovimientos frmlistadomovimiento = new frmListadoMovimientos(objbanco);
+            frmlistadomovimiento.Show(this);
+        }
     }
 }

@@ -51,58 +51,84 @@ namespace Banco
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtnrocuenta.Text))
+            try
             {
-                MessageBox.Show("Ingrese el numero de cuenta", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txtnrocuenta.Focus();
-                return;
-            }
-            if (this.tipocuenta.Text == null)
-            {
-                MessageBox.Show("Seleccionar un tipo de cuenta", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            Cuenta cuenta;
-            cuenta = objbanco.BuscarCuentaPorDni(txtnrocuenta.Text, this.tipocuenta.Text);
-            if (cuenta != null)
-            {
-                lblsaldo.Text = cuenta.Saldo.ToString();
-
-                if (rbDepositar.Checked)
+                if (string.IsNullOrEmpty(txtnrocuenta.Text))
                 {
-                    if (string.IsNullOrEmpty(txtsaldo.Text))
-                    {
-                        MessageBox.Show("Ingres un saldo a depositar", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        txtsaldo.Focus();
-                        return;
-                    }
-                    cuenta.Depositar(Convert.ToInt32(txtsaldo.Text));
-                    MessageBox.Show("Se realizo el deposito correctamente", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                    MessageBox.Show("Ingrese el numero de cuenta", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtnrocuenta.Focus();
+                    return;
+                }
+                if (this.tipocuenta.Text == null)
+                {
+                    MessageBox.Show("Seleccionar un tipo de cuenta", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
                 }
 
-                if (rbExtraer.Checked)
+                Cuenta cuenta;
+                cuenta = objbanco.BuscarCuentaPorDni(txtnrocuenta.Text, this.tipocuenta.Text);
+                if (cuenta != null)
                 {
-                    if (string.IsNullOrEmpty(txtsaldo.Text))
-                    {
-                        MessageBox.Show("Ingres un saldo a extraer", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        txtsaldo.Focus();
-                        return;
-                    }
-                    cuenta.Extraer(Convert.ToInt32(txtsaldo.Text));
-                    MessageBox.Show("Se realizo la extraccion correctamente", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                    lblsaldo.Text = cuenta.Saldo.ToString();
 
-                lblsaldo.Text = cuenta.Saldo.ToString();
+                    if (rbDepositar.Checked)
+                    {
+                        if (string.IsNullOrEmpty(txtsaldo.Text))
+                        {
+                            MessageBox.Show("Ingres un saldo a depositar", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            txtsaldo.Focus();
+                            return;
+                        }
+                        cuenta.Depositar(Convert.ToDecimal(txtsaldo.Text));
+
+                        Movimiento movimiento = new Movimiento()
+                        {
+                            Cuenta = cuenta,
+                            Fecha = DateTime.Now,
+                            Importe = Convert.ToDecimal(txtsaldo.Text),
+                            TipoMovimiento = "Deposito"
+                        };
+                        objbanco.CrearMovimiento(movimiento);
+
+                        MessageBox.Show("Se realizo el deposito correctamente", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    }
+
+                    if (rbExtraer.Checked)
+                    {
+                        if (string.IsNullOrEmpty(txtsaldo.Text))
+                        {
+                            MessageBox.Show("Ingres un saldo a extraer", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            txtsaldo.Focus();
+                            return;
+                        }
+                        cuenta.Extraer(Convert.ToDecimal(txtsaldo.Text));
+
+                        Movimiento movimiento = new Movimiento()
+                        {
+                            Cuenta = cuenta,
+                            Fecha = DateTime.Now,
+                            Importe = Convert.ToDecimal(txtsaldo.Text),
+                            TipoMovimiento = "Extraer"
+                        };
+                        objbanco.CrearMovimiento(movimiento);
+
+                        MessageBox.Show("Se realizo la extraccion correctamente", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
+                    lblsaldo.Text = cuenta.Saldo.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("El numero de cuenta ingresado no es valido", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtnrocuenta.Focus();
+                    return;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("El numero de cuenta ingresado no es valido", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txtnrocuenta.Focus();
-                return;
+                MessageBox.Show(ex.Message);
             }
-            this.Close();
         }
 
     }

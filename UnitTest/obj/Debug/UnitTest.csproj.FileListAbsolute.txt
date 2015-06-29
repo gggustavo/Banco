@@ -1,0 +1,8 @@
+C:\Users\gustavo\Documents\GitHubVisualStudio\UnitTest\obj\Debug\UnitTest.csprojResolveAssemblyReference.cache
+C:\Users\gustavo\Documents\GitHubVisualStudio\UnitTest\bin\Debug\Properties\DataSources\Titular.datasource
+C:\Users\gustavo\Documents\GitHubVisualStudio\UnitTest\bin\Debug\UnitTest.dll
+C:\Users\gustavo\Documents\GitHubVisualStudio\UnitTest\bin\Debug\UnitTest.pdb
+C:\Users\gustavo\Documents\GitHubVisualStudio\UnitTest\bin\Debug\Banco.exe
+C:\Users\gustavo\Documents\GitHubVisualStudio\UnitTest\bin\Debug\Banco.pdb
+C:\Users\gustavo\Documents\GitHubVisualStudio\UnitTest\obj\Debug\UnitTest.dll
+C:\Users\gustavo\Documents\GitHubVisualStudio\UnitTest\obj\Debug\UnitTest.pdb
